@@ -1,0 +1,38 @@
+# https://ios-docs.dev/cocoapods/
+1. install CocoaPods and setup
+
+$ gem install cocoapods
+$ pod setup
+
+2. cd to project floder
+3. create podfile
+$ pod init
+
+4. write podfile
+$ open Podfile
+# add pod 'AWSCognito' 'AWSS3' as follows
+```
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'ResNet50prj' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for ResNet50prj
+  pod 'AWSCognito'
+  pod 'AWSS3'
+  target 'ResNet50prjTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'ResNet50prjUITests' do
+    # Pods for testing
+  end
+
+end
+```
+
+5. install API
+$ pod install

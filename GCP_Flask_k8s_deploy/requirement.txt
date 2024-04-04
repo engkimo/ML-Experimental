@@ -1,0 +1,9 @@
+Flask==1.1.2
+numpy
+google-cloud-storage
+scikit-learn
+opencv-python
+gunicorn==20.0.4
+honcho==1.0.1
+tensorflow-gpu==2.4.1
+keras==2.3.1

@@ -1,0 +1,31 @@
+# A. 基本項目
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+# B. Deploymentのスペック
+spec:
+  selector:
+    matchLabels:
+      app: nginx
+  replicas: 1
+  # C. Podのテンプレート
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: envoy
+        image: envoyproxy/envoy-dev:1a9f1859fc530ca40cbd66675c4971bb6ed3d575
+        ports:
+        - containerPort: 88
+          name: envoy-port1
+        resources:
+          limits: 
+            memory: 200Mi
+
+      - name: nginx
+        image: nginx:latest  #gcr.io/${PROJECT_NAME}/test:v1
+        ports:
+        - containerPort: 80

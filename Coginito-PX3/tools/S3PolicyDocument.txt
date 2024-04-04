@@ -1,0 +1,18 @@
+# https://loooooovingyuki.medium.com/swiftからs3に画像をアップロードする方法-1388a6a5e251
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:PutObject",
+        "mobileanalytics:PutEvents",
+        "cognito-sync:*",
+        "cognito-identity:*"
+      ],
+      "Resource": [
+        "*"
+      ]
+    }
+  ]
+}

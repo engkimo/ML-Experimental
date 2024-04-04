@@ -1,0 +1,28 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: google/cloud-sdk
+      
+    # Repository for registering to circleCI
+    working_directory: /go/src/github.com/madara-tribe/go-web-server  
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: 18.06.0-ce
+      - run:
+          name: Setup CLOUD SDK
+          command: |   # GCP project name .etc
+            echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
+            gcloud --quiet config set project sturdy-willow-167902   
+            gcloud --quiet config set compute/zone asia-east1-b
+            gcloud --quiet auth configure-docker
+      - run:
+          name: Push docker image
+          command: |
+            docker build -t go-web-server .
+            LATEST_TAG=gcr.io/sturdy-willow-167902/go-web-server:latest
+            docker tag go-web-server $LATEST_TAG
+            docker push $LATEST_TAG            
+
+

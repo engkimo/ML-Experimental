@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gke-flask-frontend
+  labels:
+    app: gke-flask
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gke-flask
+  template:
+    metadata:
+      labels:
+        app: gke-flask
+        tier: frontend
+    spec:
+      containers:
+      - name: gke-flask-app
+        image: gcr.io/[PROJECT-ID]/flask_deploy:sonar_tf
+        imagePullPolicy: Always
+        env:
+        - name: PROCESSES
+          value: gkeflask
+        ports:
+        - name: http-server
+          containerPort: 8080

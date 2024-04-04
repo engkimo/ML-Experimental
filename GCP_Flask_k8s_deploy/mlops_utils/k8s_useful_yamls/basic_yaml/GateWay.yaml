@@ -1,0 +1,26 @@
+# A. 基本項目
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gw-deployment
+# B. Deploymentのスペック
+spec:
+  selector:
+    matchLabels:
+      app: gateway
+  replicas: 2
+  # C. Podのテンプレート
+  template:
+    metadata:
+      labels:
+        app: gateway
+    spec:
+      volumes:
+      - name: envoy
+      containers:
+      - name: envoy
+        image: envoyproxy/envoy-alpine-debug-dev
+        imagePullPolicy: IfNotPresent
+        ports:
+            - containerPort: 88
+              name: envoy-port1

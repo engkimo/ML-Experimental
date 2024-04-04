@@ -1,0 +1,12 @@
+numpy
+#torch==1.6.0 
+#torchvision==0.7.0
+#torchaudio
+tensorboardX==2.0
+matplotlib
+tqdm
+easydict
+Pillow
+onnxconverter-common==1.6.0
+onnx==1.6.0
+onnxruntime

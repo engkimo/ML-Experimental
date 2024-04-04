@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata: 
+  name: prevent-debug
+spec:
+  clusterIP: None
+  ports:
+  - name: not-vital
+    port: 88
+    protocol: TCP
+    targetPort: 88
+  selector:
+    app: nginx

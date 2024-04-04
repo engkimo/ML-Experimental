@@ -1,0 +1,8 @@
+{
+    "name": "event_driven_job",
+    "description": "event driven job",
+    "memory": 1024,
+    "timeout": 120,
+    "role": "arn:aws:iam::＊＊＊:role/datadog_logs",
+    "environment": {}
+}

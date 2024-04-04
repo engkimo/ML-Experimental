@@ -1,0 +1,9 @@
+{
+    "description": "datadog_logs",
+    "runtime": "python3.6",
+    "handler": "datadog_logs.lambda_handler",
+    "environment":
+    {
+        "ENV": "dev"
+    }
+}

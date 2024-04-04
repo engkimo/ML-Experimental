@@ -1,0 +1,38 @@
+# !/bin/sh
+export PROJECT_ID=$(gcloud config list project --format "value(core.project)")
+export IMAGE_REPO_NAME=flask_deploy
+export IMAGE_TAG=sonar_tf
+export IMAGE_URI=gcr.io/$PROJECT_ID/$IMAGE_REPO_NAME:$IMAGE_TAG
+docker build -t $IMAGE_URI .
+docker push $IMAGE_URI
+kubectl apply -f gke-flask-frontend.yaml
+>>>>> deployment.apps/gke-flask-frontend created
+
+$ kubectl get deployments
+>>>>
+NAME                 READY   UP-TO-DATE   AVAILABLE   AGE
+gke-flask-frontend   1/1     1            1           4m15s
+
+
+$ kubectl get pods
+>>>>
+NAME                                  READY   STATUS    RESTARTS   AGE
+gke-flask-frontend-68d5867f54-bt6vp   1/1     Running   0          4m42s
+
+$ kubectl apply -f gke-flask-service.yaml
+>>>> service/gke-flask-frontend created
+
+$ kubectl get services (+gke-flask-frontend)
+>>>>>
+NAME                 TYPE           CLUSTER-IP     EXTERNAL-IP     PORT(S)        AGE
+gke-flask-frontend   LoadBalancer   10.48.13.188   34.123.250.65   80:30204/TCP   57s
+kubernetes           ClusterIP      10.48.0.1      <none>          443/TCP        46m
+
+
+$ curl -X POST -H "Content-Type: application/json" -d '{"key":"http://toretama.jp/img/mouseover-zoomup-image.jpg"}' http://35.222.64.236/reply
+>>> 502
+
+
+## post-process
+kubectl delete services gke-flask-frontend
+kubectl delete deployments gke-flask-frontend
